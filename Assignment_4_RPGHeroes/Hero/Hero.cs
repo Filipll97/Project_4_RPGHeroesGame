@@ -17,7 +17,7 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
         public string Name { get; protected set; }
         public string HeroClass { get; protected set; }
         public int Level { get; protected set; } = 1;
-        public HeroAttribute LevelAttribtues { get; set; }
+        public HeroAttribute LevelAttributes { get; set; }
         public Dictionary<Slot, Item> Equipment { get; protected set; } = new Dictionary<Slot, Item>
             {
                 { Slot.Weapon, null },
@@ -48,7 +48,7 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
         }
         public HeroAttribute TotalAttributes()
         {
-            HeroAttribute totalAttributes = new HeroAttribute() { Strength = LevelAttribtues.Strength, Dexterity = LevelAttribtues.Dexterity, Intelligence = LevelAttribtues.Intelligence };
+            HeroAttribute totalAttributes = new HeroAttribute() { Strength = LevelAttributes.Strength, Dexterity = LevelAttributes.Dexterity, Intelligence = LevelAttributes.Intelligence };
 
             foreach (var item in Equipment.Values)
             {

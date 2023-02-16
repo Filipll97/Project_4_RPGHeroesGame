@@ -11,7 +11,7 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
         {
             Name = name;
             HeroClass = "Ranger";
-            LevelAttribtues = new HeroAttribute { Strength = 1, Dexterity = 7, Intelligence = 1 };
+            LevelAttributes = new HeroAttribute { Strength = 1, Dexterity = 7, Intelligence = 1 };
 
             ValidWeaponTypes.Add(WeaponTypes.Bows);
             ValidArmorTypes.Add(ArmorTypes.Leather);
@@ -21,7 +21,7 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
         public override void LevelUp()
         {
             Level++;
-            LevelAttribtues.IncreaseHeroAttribute(1, 5, 1); // TODO: Add private fields instead of hard coded values
+            LevelAttributes.IncreaseHeroAttribute(1, 5, 1); // TODO: Add private fields instead of hard coded values
         }
     }
 }

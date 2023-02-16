@@ -21,6 +21,5 @@ namespace Assignment_4_RPGHeroes.Items.Weapons
         public int WeaponDamage { get; set; }
         public WeaponTypes WeaponType { get; set; }
 
-
     }
 }

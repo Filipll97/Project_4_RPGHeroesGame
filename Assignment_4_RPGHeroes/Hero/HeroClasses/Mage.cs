@@ -12,7 +12,7 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
         {
             Name = name;
             HeroClass = "Mage";
-            LevelAttribtues = new HeroAttribute { Strength = 1, Dexterity = 1, Intelligence = 8 };
+            LevelAttributes = new HeroAttribute { Strength = 1, Dexterity = 1, Intelligence = 8 };
 
             ValidWeaponTypes.Add(WeaponTypes.Staffs);
             ValidWeaponTypes.Add(WeaponTypes.Wands);
@@ -23,7 +23,7 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
         public override void LevelUp()
         {
             Level++;
-            LevelAttribtues.IncreaseHeroAttribute(1, 1, 5);
+            LevelAttributes.IncreaseHeroAttribute(1, 1, 5);
         }
 
 

@@ -11,7 +11,7 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
         {
             Name = name;
             HeroClass = "Warrior";
-            LevelAttribtues = new HeroAttribute { Strength = 5, Dexterity = 2, Intelligence = 1 };
+            LevelAttributes = new HeroAttribute { Strength = 5, Dexterity = 2, Intelligence = 1 };
 
             ValidWeaponTypes.Add(WeaponTypes.Axes);
             ValidWeaponTypes.Add(WeaponTypes.Hammers);
@@ -23,7 +23,7 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
         public override void LevelUp()
         {
             Level++;
-            LevelAttribtues.IncreaseHeroAttribute(3, 2, 1);
+            LevelAttributes.IncreaseHeroAttribute(3, 2, 1);
         }
     }
 }
