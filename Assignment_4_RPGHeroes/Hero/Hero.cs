@@ -3,12 +3,6 @@ using Assignment_4_RPGHeroes.Items;
 using Assignment_4_RPGHeroes.Items.Armor;
 using Assignment_4_RPGHeroes.Items.Weapons;
 using Assignment_4_RPGHeroes.Items.ItemExceptions;
-using Assignment_4_RPGHeroes.Player.HeroClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assignment_4_RPGHeroes.PlayerClasses
 {
@@ -17,7 +11,7 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
         public string Name { get; protected set; }
         public string HeroClass { get; protected set; }
         public int Level { get; protected set; } = 1;
-        public HeroAttribute LevelAttribtues { get; set; }
+        public HeroAttribute LevelAttributes { get; set; }
         public Dictionary<Slot, Item> Equipment { get; protected set; } = new Dictionary<Slot, Item>
             {
                 { Slot.Weapon, null },
@@ -38,16 +32,18 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
             else
                 throw new InvalidWeaponException(Level, weaponToEquip.RequiredLevel);
         }
-        public void EquipArmor(Armor armorToEquip, Slot slot) //[TODO]: Change to a override version of Equip item function
+        
+        public void EquipArmor(Armor armorToEquip, Slot slot)
         {
             if (armorToEquip.RequiredLevel <= Level && ValidArmorTypes.Contains(armorToEquip.ArmorType))
                 Equipment[slot] = armorToEquip;
             else
                 throw new InvalidArmorException(Level, armorToEquip.RequiredLevel);
         }
+        
         public HeroAttribute TotalAttributes()
         {
-            HeroAttribute totalAttributes = new HeroAttribute() { Strength = LevelAttribtues.Strength, Dexterity = LevelAttribtues.Dexterity, Intelligence = LevelAttribtues.Intelligence };
+            HeroAttribute totalAttributes = new HeroAttribute() { Strength = LevelAttributes.Strength, Dexterity = LevelAttributes.Dexterity, Intelligence = LevelAttributes.Intelligence };
 
             foreach (var item in Equipment.Values)
             {
@@ -61,13 +57,14 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
 
             return totalAttributes;
         }
+        
         public double Damage()
         {
             Weapon equippedWeapon = Equipment[Slot.Weapon] as Weapon;
 
             if (equippedWeapon == null)
             {
-                equippedWeapon = new Weapon() { WeaponDamage = 1 }; // [TODO]: Throw exception when hero have no weapon equipped! 
+                equippedWeapon = new Weapon() { WeaponDamage = 1 };
             }
 
             switch (HeroClass)
