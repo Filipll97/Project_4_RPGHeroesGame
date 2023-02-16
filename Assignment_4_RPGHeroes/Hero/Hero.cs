@@ -27,16 +27,16 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
 
         public void EquipWeapon(Weapon weaponToEquip)
         {
-            if (weaponToEquip.RequiredLevel <= Level && ValidWeaponTypes.Contains(weaponToEquip.WeaponType))
-                Equipment[0] = weaponToEquip;
+            if (weaponToEquip.RequiredLevel <= Level && ValidWeaponTypes.Contains(weaponToEquip.WeaponType) && weaponToEquip.ItemSlot == Slot.Weapon)
+                Equipment[weaponToEquip.ItemSlot] = weaponToEquip; 
             else
-                throw new InvalidWeaponException(Level, weaponToEquip.RequiredLevel);
+                throw new InvalidWeaponException(Level, weaponToEquip.RequiredLevel); 
         }
-        
-        public void EquipArmor(Armor armorToEquip, Slot slot)
+    
+        public void EquipArmor(Armor armorToEquip)
         {
-            if (armorToEquip.RequiredLevel <= Level && ValidArmorTypes.Contains(armorToEquip.ArmorType))
-                Equipment[slot] = armorToEquip;
+            if (armorToEquip.RequiredLevel <= Level && ValidArmorTypes.Contains(armorToEquip.ArmorType) && armorToEquip.ItemSlot != Slot.Weapon)
+                Equipment[armorToEquip.ItemSlot] = armorToEquip;
             else
                 throw new InvalidArmorException(Level, armorToEquip.RequiredLevel);
         }

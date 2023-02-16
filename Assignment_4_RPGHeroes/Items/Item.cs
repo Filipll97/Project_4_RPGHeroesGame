@@ -17,5 +17,6 @@ namespace Assignment_4_RPGHeroes.Items
     {
         public string Name { get; set; }
         public int RequiredLevel { get; set; }
+        public Slot ItemSlot { get; set; }
     }
 }

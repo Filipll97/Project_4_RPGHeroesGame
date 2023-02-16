@@ -1,5 +1,4 @@
 ﻿using Assignment_4_RPGHeroes.Attributes;
-using Assignment_4_RPGHeroes.Items;
 using Assignment_4_RPGHeroes.Items.Armor;
 using Assignment_4_RPGHeroes.Items.Weapons;
 using Assignment_4_RPGHeroes.PlayerClasses;
