@@ -68,7 +68,7 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
 
             if (equippedWeapon == null)
             {
-                equippedWeapon = new Weapon() { WeaponDamage = 1 }; // [TODO]: Throw exception when hero have no weapon equipped! 
+                equippedWeapon = new Weapon() { WeaponDamage = 1 }; 
             }
 
             switch (HeroClass)
