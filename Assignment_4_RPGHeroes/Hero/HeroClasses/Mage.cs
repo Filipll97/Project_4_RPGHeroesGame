@@ -8,11 +8,21 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
 {
     public class Mage : Hero
     {
+        // Base Stats
+        private int baseStrength = 1;
+        private int baseDexterity = 1;
+        private int baseIntelligence = 8;
+
+        // Increase stats on level up values 
+        private int increaseStrengthValue = 1;
+        private int increaseDexterityValue = 1;
+        private int increaseIntelligenceValue = 5;
+
         public Mage(string name)
         {
             Name = name;
             HeroClass = "Mage";
-            LevelAttribtues = new HeroAttribute { Strength = 1, Dexterity = 1, Intelligence = 8 };
+            LevelAttributes = new HeroAttribute { Strength = baseStrength, Dexterity = baseDexterity, Intelligence = baseIntelligence };
 
             ValidWeaponTypes.Add(WeaponTypes.Staffs);
             ValidWeaponTypes.Add(WeaponTypes.Wands);
@@ -23,7 +33,7 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
         public override void LevelUp()
         {
             Level++;
-            LevelAttribtues.IncreaseHeroAttribute(1, 1, 5);
+            LevelAttributes.IncreaseHeroAttribute(increaseStrengthValue, increaseDexterityValue, increaseIntelligenceValue);
         }
 
 

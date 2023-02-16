@@ -8,11 +8,21 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
 {
     public class Rogue : Hero
     {
+        // Base Stats
+        private int baseStrength = 2;
+        private int baseDexterity = 6;
+        private int baseIntelligence = 1;
+
+        // Increase stats on level up values 
+        private int increaseStrengthValue = 1;
+        private int increaseDexterityValue = 4;
+        private int increaseIntelligenceValue = 1;
+
         public Rogue(string name)
         {
             Name = name;
             HeroClass = "Rogue";
-            LevelAttribtues = new HeroAttribute { Strength = 2, Dexterity = 6, Intelligence = 1 };
+            LevelAttributes = new HeroAttribute { Strength = baseStrength, Dexterity = baseDexterity, Intelligence = baseIntelligence };
 
             ValidWeaponTypes.Add(WeaponTypes.Daggers);
             ValidWeaponTypes.Add(WeaponTypes.Swords);
@@ -23,7 +33,7 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
         public override void LevelUp()
         {
             Level++;
-            LevelAttribtues.IncreaseHeroAttribute(1, 4, 1);
+            LevelAttributes.IncreaseHeroAttribute(increaseStrengthValue, increaseDexterityValue, increaseIntelligenceValue);
         }
     }
 }
