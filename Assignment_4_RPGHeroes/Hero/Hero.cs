@@ -3,12 +3,6 @@ using Assignment_4_RPGHeroes.Items;
 using Assignment_4_RPGHeroes.Items.Armor;
 using Assignment_4_RPGHeroes.Items.Weapons;
 using Assignment_4_RPGHeroes.Items.ItemExceptions;
-using Assignment_4_RPGHeroes.Player.HeroClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assignment_4_RPGHeroes.PlayerClasses
 {
@@ -38,7 +32,7 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
             else
                 throw new InvalidWeaponException(Level, weaponToEquip.RequiredLevel); 
         }
-        
+    
         public void EquipArmor(Armor armorToEquip)
         {
             if (armorToEquip.RequiredLevel <= Level && ValidArmorTypes.Contains(armorToEquip.ArmorType) && armorToEquip.ItemSlot != Slot.Weapon)
@@ -46,6 +40,7 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
             else
                 throw new InvalidArmorException(Level, armorToEquip.RequiredLevel);
         }
+        
         public HeroAttribute TotalAttributes()
         {
             HeroAttribute totalAttributes = new HeroAttribute() { Strength = LevelAttributes.Strength, Dexterity = LevelAttributes.Dexterity, Intelligence = LevelAttributes.Intelligence };
@@ -62,13 +57,14 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
 
             return totalAttributes;
         }
+        
         public double Damage()
         {
             Weapon equippedWeapon = Equipment[Slot.Weapon] as Weapon;
 
             if (equippedWeapon == null)
             {
-                equippedWeapon = new Weapon() { WeaponDamage = 1 }; 
+                equippedWeapon = new Weapon() { WeaponDamage = 1 };
             }
 
             switch (HeroClass)
