@@ -2,17 +2,11 @@
 using Assignment_4_RPGHeroes.Items;
 using Assignment_4_RPGHeroes.Items.Armor;
 using Assignment_4_RPGHeroes.Items.Weapons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPGHerosTests
 {
     public class ItemTests
     {
-        //Weapon staff = new Weapon { Name = "Doom Staff", WeaponType = WeaponTypes.Staffs, RequiredLevel = 1, WeaponDamage = 10 };
         #region Creation Items
             #region Creation Item Weapon
             [Fact]

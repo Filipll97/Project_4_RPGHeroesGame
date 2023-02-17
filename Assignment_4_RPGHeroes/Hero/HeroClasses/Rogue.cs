@@ -9,7 +9,7 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
     public class Rogue : Hero
     {
         // Base Stats
-        private int baseStrength = 2;
+        public int baseStrength = 2;
         private int baseDexterity = 6;
         private int baseIntelligence = 1;
 

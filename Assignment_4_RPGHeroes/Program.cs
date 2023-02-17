@@ -14,7 +14,6 @@ public class Program
 
         Ranger newRangerHero = new Ranger("Malin");
 
-        // Make function to print hero info
         Console.WriteLine(mageHero.DisplayHeroInfo());
         mageHero.LevelUp();
         Console.WriteLine(mageHero.DisplayHeroInfo());

@@ -1,4 +1,7 @@
 using Assignment_4_RPGHeroes.Attributes;
+using Assignment_4_RPGHeroes.Items;
+using Assignment_4_RPGHeroes.Items.Armor;
+using Assignment_4_RPGHeroes.Items.Weapons;
 using Assignment_4_RPGHeroes.Player.HeroClasses;
 using Assignment_4_RPGHeroes.PlayerClasses;
 
@@ -86,7 +89,7 @@ namespace RPGHeroesTests
             }
 
             [Fact]
-            public void Cunstructor_InitializeHeroRangerWithName_ShouldCreateHeroRangerWithBaseMageAttributes()
+            public void Cunstructor_InitializeHeroRangerWithName_ShouldCreateHeroRangerWithBaseRangerAttributes()
             {
                 // Arrange 
                 string heroName = "Filip";
@@ -178,7 +181,7 @@ namespace RPGHeroesTests
             }
 
             [Fact]
-            public void Cunstructor_InitializeHeroWarriorWithName_ShouldCreateHeroRangerWithBaseWarriorAttributes()
+            public void Cunstructor_InitializeHeroWarriorWithName_ShouldCreateHeroWarriorWithBaseWarriorAttributes()
             {
                 // Arrange 
                 string heroName = "Filip";
@@ -321,5 +324,175 @@ namespace RPGHeroesTests
             }
             #endregion
         #endregion
+
+        #region Calculate TotalAttributes
+            #region Calculate TotalAttributes when equipping a armor
+            [Fact]
+            public void CalculateTotalAttributesWithNoArmorEquipment_ShouldComputeTheCorrectTotalAttributesOnHero()
+            {
+                // Arrange 
+                Hero newRogueHero = new Rogue("Filip");
+                HeroAttribute totalAttributes = newRogueHero.TotalAttributes();
+                HeroAttribute expected = totalAttributes;
+
+                // Act
+                HeroAttribute actual = newRogueHero.LevelAttributes;
+
+                // Assert
+                Assert.Equivalent(expected, actual);
+            }
+
+            [Fact]
+            public void CalculateTotalAttributesWithOneArmorPieceEquipment_ShouldComputeTheCorrectTotalAttributesOnHero()
+            {
+                // Arrange 
+                Hero newRogueHero = new Rogue("Filip");
+                Armor newArmor = new Armor() { Name = "Steel Boots", StrengthValue = 1, DexterityValue = 2, IntelligenceValue = 4, ArmorType = ArmorTypes.Leather, RequiredLevel = 1, ItemSlot = Slot.Legs };
+                HeroAttribute expected = new HeroAttribute() { Strength = 3, Dexterity = 8, Intelligence = 5 };
+
+                // Act
+                newRogueHero.EquipArmor(newArmor);
+                HeroAttribute actual = newRogueHero.TotalAttributes();
+
+                // Assert
+                Assert.Equivalent(expected, actual);
+            }
+
+            [Fact]
+            public void CalculateTotalAttributesWithTwoArmorPieceEquipment_ShouldComputeTheCorrectTotalAttributesOnHero()
+            {
+                // Arrange 
+                Hero newRogueHero = new Rogue("Filip");
+                Armor newBoots = new Armor() { Name = "Steel Boots", StrengthValue = 1, DexterityValue = 2, IntelligenceValue = 4, ArmorType = ArmorTypes.Mail, RequiredLevel = 1, ItemSlot = Slot.Legs };
+                Armor newHelmet = new Armor() { Name = "Steel helmet", StrengthValue = 2, DexterityValue = 1, IntelligenceValue = 4, ArmorType = ArmorTypes.Mail, RequiredLevel = 1, ItemSlot = Slot.Head };
+                HeroAttribute expected = new HeroAttribute() { Strength = 5, Dexterity = 9, Intelligence = 9 };
+
+                // Act
+                newRogueHero.EquipArmor(newBoots);
+                newRogueHero.EquipArmor(newHelmet);
+                HeroAttribute actual = newRogueHero.TotalAttributes();
+
+                // Assert
+                Assert.Equivalent(expected, actual);
+            }
+
+            [Fact]
+            public void CalculateTotalAttributesWithOneReplacedArmorPieceEquipment_ShouldComputeTheCorrectTotalAttributesOnHero()
+            {
+                // Arrange 
+                Hero newRogueHero = new Rogue("Filip");
+            
+                Armor newBoots = new Armor() { Name = "Steel Boots", StrengthValue = 10, DexterityValue = 2, IntelligenceValue = 4, ArmorType = ArmorTypes.Mail, RequiredLevel = 1, ItemSlot = Slot.Legs };
+                Armor newCopparBoots = new Armor() { Name = "Steel helmet", StrengthValue = 3, DexterityValue = 1, IntelligenceValue = 5, ArmorType = ArmorTypes.Mail, RequiredLevel = 1, ItemSlot = Slot.Legs };
+            
+                HeroAttribute expected = new HeroAttribute() { Strength = 5, Dexterity = 7, Intelligence = 6 };
+
+                // Act
+                newRogueHero.EquipArmor(newBoots);
+                newRogueHero.EquipArmor(newCopparBoots);
+                HeroAttribute actual = newRogueHero.TotalAttributes();
+
+                // Assert
+                Assert.Equivalent(expected, actual);
+            }
+            #endregion
+            #region Calculate TotalAttributes when equipping a weapon
+            [Fact]
+            public void CalculateDamageOnHeroWithNoWeaponEquipment_ShouldComputeTheCorrectWeaponDamageOnHero()
+            {
+                // Arrange 
+                Hero newRogueHero = new Rogue("Filip");
+                double expected = 1 + ((double)newRogueHero.TotalAttributes().Dexterity / 100);
+
+                // Act
+                double actual = newRogueHero.Damage();
+
+                // Assert
+                Assert.Equivalent(expected, actual);
+            }
+
+            [Fact]
+            public void CalculateDamageOnHeroWithWeaponEquipment_ShouldComputeTheCorrectDamageOnHero()
+            {
+                // Arrange 
+                Hero newRogueHero = new Rogue("Filip");
+                Weapon newWeapon = new Weapon() { Name = "Steel dagger", WeaponType = WeaponTypes.Daggers, RequiredLevel = 1, ItemSlot = Slot.Weapon, WeaponDamage = 2 };
+                newRogueHero.EquipWeapon(newWeapon);
+                
+                double expected = newWeapon.WeaponDamage * (1 + ((double)newRogueHero.TotalAttributes().Dexterity / 100));
+
+                // Act
+                double actual = newRogueHero.Damage();
+
+                // Assert
+                Assert.Equivalent(expected, actual);
+            }
+
+            [Fact]
+            public void CalculateDamageWithOneReplacedWeaponPieceEquipment_ShouldComputeTheCorrectDamageOnHero()
+            {
+                // Arrange 
+                Hero newRogueHero = new Rogue("Filip");
+                Weapon newSteelDagger = new Weapon() { Name = "Steel Dagger", WeaponType = WeaponTypes.Daggers, RequiredLevel = 1, ItemSlot = Slot.Weapon, WeaponDamage = 2 };
+                Weapon newGoldDagger = new Weapon() { Name = "Gold Dagger", WeaponType = WeaponTypes.Daggers, RequiredLevel = 1, ItemSlot = Slot.Weapon, WeaponDamage = 3};
+                
+                newRogueHero.EquipWeapon(newSteelDagger);
+                newRogueHero.EquipWeapon(newGoldDagger);
+
+                double expected = newGoldDagger.WeaponDamage * (1 + ((double)newRogueHero.TotalAttributes().Dexterity / 100));
+
+                // Act
+                double actual = newRogueHero.Damage();
+
+                // Assert
+                Assert.Equivalent(expected, actual);
+            }
+
+            [Fact]
+            public void CalculateDamageOnHeroWithArmorPiecesAndWeaponEquipment_ShouldComputeTheCorrectDamageOnHero()
+            {
+                // Arrange 
+                Hero newWarriorHero = new Warrior("Filip");
+                Weapon newSteelSword = new Weapon() { Name = "Steel Boots", WeaponType = WeaponTypes.Swords, RequiredLevel = 1, ItemSlot = Slot.Weapon, WeaponDamage = 10 };
+                Armor newHelmet = new Armor() { Name = "Steel helmet", StrengthValue = 3, DexterityValue = 1, IntelligenceValue = 5, ArmorType = ArmorTypes.Mail, RequiredLevel = 1, ItemSlot = Slot.Head };
+                Armor newChestPlate = new Armor() { Name = "Steel chestPlate", StrengthValue = 3, DexterityValue = 1, IntelligenceValue = 5, ArmorType = ArmorTypes.Mail, RequiredLevel = 1, ItemSlot = Slot.Body };
+                Armor newBoots = new Armor() { Name = "Steel boots", StrengthValue = 3, DexterityValue = 1, IntelligenceValue = 5, ArmorType = ArmorTypes.Mail, RequiredLevel = 1, ItemSlot = Slot.Legs };
+
+                newWarriorHero.EquipWeapon(newSteelSword);
+                newWarriorHero.EquipArmor(newHelmet);
+                newWarriorHero.EquipArmor(newChestPlate);
+                newWarriorHero.EquipArmor(newBoots);
+
+                double expected = newSteelSword.WeaponDamage * (1 + ((double)newWarriorHero.TotalAttributes().Strength / 100));
+
+                // Act
+                double actual = newWarriorHero.Damage();
+
+                // Assert
+                Assert.Equivalent(expected, actual);
+            }
+            #endregion
+        #endregion
+
+        #region Display Hero Stats
+        [Fact]
+        public void DisplayHeroStats_ShouldDisplayAHerosStatsCorrecly()
+        {
+            // Arrange  
+            string heroName = "Malin";
+            Hero newMageHero = new Mage(heroName);
+            string expected = $":----Hero Stats----:\n\bName: {heroName} \nClass: Mage" +
+            $"\nLevel: 1\nTotal Strength: 1" +
+                $"\nTotal Dexterity: 1\n" +
+                $"Total Intelligence: 8\nDamage: {newMageHero.Damage()}\n";
+           
+            // Act
+            string actual = newMageHero.DisplayHeroInfo();
+            
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        #endregion 
     }
 }
