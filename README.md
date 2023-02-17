@@ -1,5 +1,5 @@
 # Project_4_RPGHeroesGame
-This is a console application project that serves as the backend for a role-playing game (RPG) focused on heroes. It was developed as part of the Experis Academy and was implemented using C# programming language with Visual Studio as the Integrated Development Environment (IDE). The Xunit framework was used for unit testing.
+This is a console application project that serves as the backend for a role-playing game (RPG) focused on heroes. It was developed as part of the Experis Academy program and was implemented using C# programming language with Visual Studio as the Integrated Development Environment (IDE). The Xunit framework was used for unit testing.
 
 The application involves four unique hero classes - Mage, Ranger, Rogue, and Warrior - who can equip a wide range of items, including weapons and armor. The weapons are available in several types, including Axes, Bows, Daggers, Hammers, Staffs, Swords, and Wands, while the armor is available in Cloth, Leather, Mail, and Plate types. Each hero class have diffrent hero attributes like strength, dexterity, and intelligence that incresses if the hero levels up or equip armor.
 
