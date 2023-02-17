@@ -26,7 +26,6 @@ namespace Assignment_4_RPGHeroes.Player.HeroClasses
             ValidWeaponTypes.Add(WeaponTypes.Staffs);
             ValidWeaponTypes.Add(WeaponTypes.Wands);
             ValidArmorTypes.Add(ArmorTypes.Cloth);
-
         }
 
         public override void LevelUp()

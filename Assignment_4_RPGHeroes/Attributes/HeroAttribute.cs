@@ -12,8 +12,6 @@ namespace Assignment_4_RPGHeroes.Attributes
         public int Dexterity { get; set; }
         public int Intelligence { get; set; }
 
-
-        // Increase player stats 
         public void IncreaseHeroAttribute(int strength, int dexterity, int intelligence)
         {
             Strength += strength;

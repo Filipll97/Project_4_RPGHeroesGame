@@ -22,7 +22,6 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
         public List<WeaponTypes> ValidWeaponTypes { get; set; } = new List<WeaponTypes>();
         public List<ArmorTypes> ValidArmorTypes { get; set; } = new List<ArmorTypes>();
 
-        // Public Facing Methods:
         public abstract void LevelUp();
 
         public void EquipWeapon(Weapon weaponToEquip)
@@ -49,9 +48,7 @@ namespace Assignment_4_RPGHeroes.PlayerClasses
             {
                 if (item is Armor armor)
                 {
-                    totalAttributes.Strength += armor.StrengthValue;
-                    totalAttributes.Dexterity += armor.DexterityValue;
-                    totalAttributes.Intelligence += armor.IntelligenceValue;
+                    totalAttributes.IncreaseHeroAttribute(armor.StrengthValue, armor.DexterityValue, armor.IntelligenceValue);
                 }
             }
 
